@@ -325,6 +325,10 @@ const gamer1 = new Gamer(); // ReferenceError: Gamer is not defined
 class Gamer {}
 ```
 
+### Summary
+
+![](https://s3-eu-west-1.amazonaws.com/ih-materials/uploads/upload_6b2d9ee1f8d0c762424b0f120cb402a2.png)
+
 ## ES6 features: destructuring
 
 - Applied on objects:
