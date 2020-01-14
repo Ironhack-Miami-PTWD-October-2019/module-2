@@ -1,0 +1,6 @@
+# env varibles don't go to github but for learning purposes we might sometimes push them
+# .env
+
+node_modules
+
+secret.js
