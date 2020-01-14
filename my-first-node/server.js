@@ -1,11 +1,18 @@
+// run node server.js in terminal and BOOM!
 // console.log('Is this my first node project? ☝🏻');
+
+// all requires will always go in the beginning of the file!
+
+// how to get package in this file (require)...
 const myChalk = require('chalk');
 const myHttp = require('http');
 require('dotenv').config();
 
+// and how to use it:
 console.log(myChalk.blue('This text is blue! 💙'));
 console.log(myChalk.green('Is this green? ✅ '));
 
+// how to create server:
 const myServer = myHttp.createServer((request, response) => {
   console.log(`Requested URL is: ${request.url}`);
   if (request.url === '/') {
