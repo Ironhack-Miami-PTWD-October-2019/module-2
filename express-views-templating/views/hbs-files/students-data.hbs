@@ -1,0 +1,15 @@
+{{!-- this is example of array of strings only --}}
+<section class="students">
+    <ul>
+        {{#each studentNames }}
+            <li> {{ this }} </li>
+        {{/each }}
+    </ul>
+</section>
+
+{{!-- render the name of the first student --}}
+{{!-- to display 1st string from array use array.[0] --}}
+<p>This is the 1st student name: {{ studentNames.[0] }}. </p>
+
+{{!-- to display the first object's property from the array of objects
+use array.0.propertyName --}}

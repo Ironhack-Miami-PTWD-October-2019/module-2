@@ -1,0 +1,29 @@
+{{!-- this is example of using objects --}}
+
+<h1>The random student is: 🥁🥁🥁</h1>
+<section>
+    {{!-- <h2>{{ dataToBeSent.randomStudent.firstName }}</h2> --}}
+    <h2>{{ randomStudent.firstName }} {{ randomStudent.lastName }} </h2>
+    <p> Bootcamp: </p>
+    <ul>
+        {{#each randomStudent.bootcamp}}
+            <li>Course {{@index}} - {{ this.type }} </li>
+            {{#if this.graduated }}
+                <li>{{this.year }}</li>
+            {{/if}}
+        {{/each}}
+    </ul>
+    {{!-- {{#if randomStudent.isCareerChanger}}
+        <p>This student is career changer.</p>
+    {{else}}
+        <p>This student is not career changer.</p>
+    {{/if}} --}}
+
+    {{#unless randomStudent.isCareerChanger}}
+        <p>This student definitely is not career changer! </p>
+    {{/unless}}
+</section>
+
+<div>
+    <a href="/random">Pick another random student</a>
+</div>
