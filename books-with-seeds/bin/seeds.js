@@ -159,4 +159,41 @@ const createAuthors = books.map(oneBook => {
   return Author.create(oneBook.author)
     .then(author => author.firstName)
     .catch(err => console.log(`Err while saving in the DB: ${err}`));
+  // const newAuthor = new Author(oneBook.author);
+  // newAuthor.save();
 });
+
+let findAuthors = Promise.all(createAuthors)
+  .then(authors => {
+    // console.log('---------------------------', authors);
+    return books.map(book => {
+      return Author.findOne({ firstName: book.author.firstName, lastName: book.author.lastName }).then(author => {
+        if (!author) {
+          throw new Error(`unknown author ${book.author.firstName} ${book.author.lastName}`);
+        }
+        // const updEachBookObj = Object.assign({}, book, { author: author._id });
+        const updEachBookObj = { ...book, author: author._id };
+        // console.log('0-0-00-0-00-0-0-0-', updEachBookObj);
+        return updEachBookObj;
+      });
+    });
+  })
+  .catch(error => {
+    throw new Error(error);
+  });
+
+const saveBooks = findAuthors
+  .then(findAuthors => {
+    return Promise.all(findAuthors).then(books => {
+      return books.map(book => {
+        const newBook = new Book(book);
+        return newBook.save();
+      });
+    });
+  })
+  .then(savedBooks => {
+    Promise.all(savedBooks)
+      .then(books => books.forEach(book => console.log(`created ${book.title}`)))
+      .then(() => mongoose.connection.close())
+      .catch(err => console.log('Error while saving the book: ', err));
+  });
